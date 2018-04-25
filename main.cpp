@@ -46,7 +46,6 @@ for(int i=0;i<3;i++)
     {
     v[i]=new Matrice_patratica;
     f>>*v[i];
-    //f[i]->citire();
     }
 
 for(int i=0;i<3;i++)
