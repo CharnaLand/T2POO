@@ -52,16 +52,16 @@ public:
     Matrice();
     Matrice(int l,int c);
     ~Matrice();
-    virtual void in_stream (istream& in)=0;
-    virtual void f_stream (ifstream& fin)=0;
-    virtual void out_stream (ostream& out)=0;
+    virtual void in_stream (istream& in) {}
+    virtual void f_stream (ifstream& fin) {}
+    virtual void out_stream (ostream& out) {}
     ///FRIEND
     friend ifstream& operator>> (ifstream&,Matrice&);
     friend istream& operator>> (istream&,Matrice&);
     friend ostream& operator<< (ostream&, Matrice&);
 };
 
-class Matrice_oarecare: protected Matrice
+class Matrice_oarecare: public Matrice
 {
     int lin, col;
 public:
@@ -81,7 +81,7 @@ public:
     void out_stream (ostream& out);
 };
 
-class Matrice_patratica: protected Matrice
+class Matrice_patratica: public Matrice
 {
     int dim;
 public:
@@ -105,16 +105,6 @@ public:
     void out_stream (ostream& out);
 };
 
-void Matrice_oarecare::f_stream (ifstream& fin)
-{
-    fin>>lin>>col;
-    v=new Complex*[lin];
-    for(int i=0;i<lin;i++)
-    {
-        v[i]=new Complex[col];
-        for(int j=0;j<col;j++) fin>>v[i][j];
-    }
-}
 ifstream& operator>> (ifstream& fin,Matrice& m)
 {
     m.f_stream(fin);
@@ -141,6 +131,17 @@ void Matrice_oarecare::in_stream (istream& in)
     {
         v[i]=new Complex[col];
         for(int j=0;j<col;j++) in>>v[i][j];
+    }
+}
+
+void Matrice_oarecare::f_stream (ifstream& fin)
+{
+    fin>>lin>>col;
+    v=new Complex*[lin];
+    for(int i=0;i<lin;i++)
+    {
+        v[i]=new Complex[col];
+        for(int j=0;j<col;j++) fin>>v[i][j];
     }
 }
 
@@ -277,7 +278,6 @@ else
 out<<" ";
 return out;
 }
-
 
 
 Matrice::Matrice(){v=NULL;}

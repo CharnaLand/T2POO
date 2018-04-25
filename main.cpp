@@ -40,8 +40,8 @@ int main()
 {
 ifstream f ("date.in");
 
-Matrice **v;
-v=new Matrice*[3];
+Matrice* v[3];
+
 for(int i=0;i<3;i++)
     {
     v[i]=new Matrice_patratica;
