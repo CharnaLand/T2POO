@@ -12,28 +12,16 @@ using namespace std;
 int main()
 {
 ifstream f ("date.in");
-Matrice *oare, *patr;
-oare=new Matrice_oarecare;
-patr=new Matrice_patratica;
-f>>*oare>>*patr;
 
-Matrice_oarecare& uno=*((Matrice_oarecare*)oare);
 
-Matrice_patratica& dos=*((Matrice_patratica*)patr);
-
-Matrice_oarecare ceva(uno), cevaa(*((Matrice_oarecare*)oare));
-Matrice_patratica altcv(dos), altcvv(*((Matrice_patratica*)patr));
-cout<<uno<<ceva<<cevaa;
-cout<<dos<<altcv<<altcvv;
-
-/*
 int n;
 f>>n;
 Matrice* v[n];
 
 for(int i=0;i<n;i++)
     {
-    v[i]=new Matrice_patratica;
+    if(i%2==0) v[i]=new Matrice_patratica;
+    if(i%2==1) v[i]=new Matrice_oarecare;
     f>>*v[i];
     }
 Complex Det;
@@ -48,7 +36,7 @@ for(int i=0;i<n;i++)
         cout<<"E diag: "<<v[i]->diagonala()<<"\n";
         cout<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
     }
-*/
+
 f.close();
 return 0;
 }

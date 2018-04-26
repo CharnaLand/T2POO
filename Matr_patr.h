@@ -214,14 +214,14 @@ if(ala>0) return 1;
 else return -1;
 }
 
-void afis(Vect* Vt)
+void afiss(Vect* Vt)///DE FACUT CU MANA DE ADIO
 {
     for(int i=1;i<=Vt->n;i++)
         cout<<Vt->sol[i]<<" ";
     cout<<" -> "<<sign(Vt)<<"\n";
 }
 
-void adun (Vect* Vt, Matr* Mt)
+void adunn (Vect* Vt, Matr* Mt)
 {
 Complex x(Mt->M[0][Vt->sol[1]-1]);
 int si=sign(Vt);
@@ -233,21 +233,21 @@ x*=si;
 Mt->det+=x;
 }
 
-int ok(int* sol,int k)
+int okk(int* sol,int k)
 {
     for(int i=1;i<k;i++)
         if(sol[i]==sol[k]) return 0;
     return 1;
 }
 
-void back (Vect* Vt, Matr* Mt, int k=1)
+void backk (Vect* Vt, Matr* Mt, int k=1)
 {
-if(k==Vt->n+1) adun(Vt,Mt);
+if(k==Vt->n+1) adunn(Vt,Mt);
 else
     for(int i=1;i<=Vt->n;i++)
     {
         Vt->sol[k]=i;
-        if(ok(Vt->sol,k)) back(Vt,Mt,k+1);
+        if(okk(Vt->sol,k)) backk(Vt,Mt,k+1);
     }
 }
 
@@ -259,7 +259,7 @@ Vt.sol=new int[Vt.n+1];
 Mt.M=*this;
 Mt.det(0,0);
 
-back(&Vt,&Mt);
+backk(&Vt,&Mt);
 
 return Mt.det;
 }
