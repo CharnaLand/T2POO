@@ -1,8 +1,4 @@
-#include "CLASE.h"
-#include <iostream>
-#include <fstream>
-#include <math.h>
-
+#include "Matr_patr.h"
 using namespace std;
 
 /**
@@ -12,45 +8,47 @@ using namespace std;
 - Matrice_patratica (int dim): Matrice
 */
 
-Complex Complex::operator/ (int i)
-{
-Complex rez(re,im);
-        rez.re/=i;
-        rez.im/=i;
-return rez;
-}
-
-Complex::operator /= (int i)
-{
-    *this = *this / i;
-}
-
-Complex Complex::operator/ (const Complex& z)
-{
-Complex rez, zz(z.re,-z.im);
-    zz*=z;
-    float sub=zz.re;
-    zz(z.re,-z.im);
-    rez=*this * zz;
-    rez/=sub;
-return rez;
-}
 
 int main()
 {
 ifstream f ("date.in");
+Matrice *oare, *patr;
+oare=new Matrice_oarecare;
+patr=new Matrice_patratica;
+f>>*oare>>*patr;
 
-Matrice* v[3];
+Matrice_oarecare& uno=*((Matrice_oarecare*)oare);
 
-for(int i=0;i<3;i++)
+Matrice_patratica& dos=*((Matrice_patratica*)patr);
+
+Matrice_oarecare ceva(uno), cevaa(*((Matrice_oarecare*)oare));
+Matrice_patratica altcv(dos), altcvv(*((Matrice_patratica*)patr));
+cout<<uno<<ceva<<cevaa;
+cout<<dos<<altcv<<altcvv;
+
+/*
+int n;
+f>>n;
+Matrice* v[n];
+
+for(int i=0;i<n;i++)
     {
     v[i]=new Matrice_patratica;
     f>>*v[i];
     }
-
-for(int i=0;i<3;i++)
-    cout<<*v[i];
-
+Complex Det;
+for(int i=0;i<n;i++)
+    {
+        cout<<*v[i];
+        Det=v[i]->DETERMINANT();
+        cout<<"Determinantul este: "<<Det<<"\n";
+        cout<<"E sup: "<<v[i]->trio_sup()<<"\n";
+        cout<<"E inf: "<<v[i]->trio_inf()<<"\n";
+        cout<<"E triug: "<<v[i]->triunghiulara()<<"\n";
+        cout<<"E diag: "<<v[i]->diagonala()<<"\n";
+        cout<<"~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
+    }
+*/
 f.close();
 return 0;
 }
